@@ -1,0 +1,2 @@
+这个是用于测试，正式情况下所有的静态文件都应该放在resources目录下的子目录【除了index.html这种根文件】
+，比如static目录，template目录等等；
