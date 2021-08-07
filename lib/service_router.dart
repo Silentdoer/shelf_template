@@ -1,4 +1,4 @@
-import 'package:demo_shelf_template/abstract_controller.dart';
+import 'package:shelf_template/support/abstract_controller.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
@@ -26,7 +26,8 @@ class ServiceRouter {
     // 经过测试staticHandler最好是放到最后add
     _router.get('/aaa.txt', (_) => Response.ok('先执行了接口层面的handler'));
 
-    _controllers.forEach((controller) => _router.mount(controller.basePath, controller()));
+    _controllers.forEach(
+        (controller) => _router.mount(controller.basePath, controller()));
     return _router;
   }
 
@@ -35,8 +36,9 @@ class ServiceRouter {
     print(request.url.queryParametersAll);
     return Response.ok('test1 process ${request.url}');
   }
-  
+
   Future<Response> _test2(Request request) async {
-    return Response.ok('test2 process ${request.context} -- ${await request.readAsString()}');
+    return Response.ok(
+        'test2 process ${request.context} -- ${await request.readAsString()}');
   }
 }

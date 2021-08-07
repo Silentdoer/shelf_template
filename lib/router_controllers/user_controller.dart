@@ -1,8 +1,8 @@
-import 'package:demo_shelf_template/abstract_controller.dart';
+import 'package:shelf_template/support/abstract_controller.dart';
 import 'package:shelf/shelf.dart';
 
 class UserController extends AbstractController {
-  UserController(): super('/user/');
+  UserController() : super('/user/');
 
   @override
   void config() {
@@ -27,7 +27,10 @@ class UserController extends AbstractController {
   Future<Response> _nameById(Request request, String userId) {
     return Future.sync(() {
       return Response.ok('userId is $userId');
-    }).then((response) async => Response.ok((await response.readAsString()) + 'fuck')).onError((error, stackTrace) => throw ArgumentError('ssss'));
+    })
+        .then((response) async =>
+            Response.ok((await response.readAsString()) + 'fuck'))
+        .onError((error, stackTrace) => throw ArgumentError('ssss'));
   }
 
   Response _queryParam(Request request, String foo, String aaa) {
