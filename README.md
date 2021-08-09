@@ -1,1 +1,1 @@
-A simple command-line application.
+shelf web application template
