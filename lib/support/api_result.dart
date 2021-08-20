@@ -1,7 +1,6 @@
 import 'dart:convert' as convert;
 
 class ApiResult<T> {
-
   bool _ok = true;
 
   bool get ok => _ok;
@@ -23,36 +22,61 @@ class ApiResult<T> {
 
   ApiResult._withState(this.code, this.message, this.state);
 
-  Map<String, dynamic> toJson() => {'ok': ok, 'code': code, 'message': message, 'timestamp': timestamp, 'state': state, 'thirdCode': thirdCode, 'thirdMessage': thirdMessage};
+  Map<String, dynamic> toJson() => {
+        'ok': ok,
+        'code': code,
+        'message': message,
+        'timestamp': timestamp,
+        'state': state,
+        'thirdCode': thirdCode,
+        'thirdMessage': thirdMessage
+      };
 
   String toJsonString() {
     return convert.jsonEncode(this);
   }
 
-  static ApiResult<D> successExec<D>({D? data, String? message, ApiResultState<D>? state}) {
-    var result = ApiResult<D>._withState(ApiResultCodeEnum.successExec.code
-    , message ?? ApiResultCodeEnum.successExec.message, data == null ? state : ApiResultState<D>(data));
+  static ApiResult<D> successExec<D>(
+      {D? data, String? message, ApiResultState<D>? state}) {
+    var result = ApiResult<D>._withState(
+        ApiResultCodeEnum.successExec.code,
+        message ?? ApiResultCodeEnum.successExec.message,
+        data == null ? state : ApiResultState<D>(data));
     return result;
   }
 
-  static ApiResult<D> successTask<D>({D? data, String? message, ApiResultState<D>? state}) {
-    var result = ApiResult<D>._withState(ApiResultCodeEnum.successTask.code
-    , message ?? ApiResultCodeEnum.successTask.message, data == null ? state : ApiResultState<D>(data));
+  static ApiResult<D> successTask<D>(
+      {D? data, String? message, ApiResultState<D>? state}) {
+    var result = ApiResult<D>._withState(
+        ApiResultCodeEnum.successTask.code,
+        message ?? ApiResultCodeEnum.successTask.message,
+        data == null ? state : ApiResultState<D>(data));
     return result;
   }
 
   static ApiResult<Null> exceptionLogic([String? message]) {
-    var result = ApiResult<Null>._(ApiResultCodeEnum.exceptionLogic.code, message ?? ApiResultCodeEnum.exceptionLogic.message).._ok = false;
+    var result = ApiResult<Null>._(ApiResultCodeEnum.exceptionLogic.code,
+        message ?? ApiResultCodeEnum.exceptionLogic.message)
+      .._ok = false;
     return result;
   }
 
   static ApiResult<Null> errorStatus<D>([String? message]) {
-    var result = ApiResult<Null>._(ApiResultCodeEnum.errorStatus.code, message ?? ApiResultCodeEnum.errorStatus.message).._ok = false;
+    var result = ApiResult<Null>._(ApiResultCodeEnum.errorStatus.code,
+        message ?? ApiResultCodeEnum.errorStatus.message)
+      .._ok = false;
     return result;
   }
 
-  static ApiResult<D> custom<D>({required ApiResultCodeEnum codeEnum, D? data, String? message, ApiResultState<D>? state}) {
-    var result = ApiResult<D>._withState(codeEnum.code, message ?? codeEnum.message, data == null ? state : ApiResultState<D>(data));
+  static ApiResult<D> custom<D>(
+      {required ApiResultCodeEnum codeEnum,
+      D? data,
+      String? message,
+      ApiResultState<D>? state}) {
+    var result = ApiResult<D>._withState(
+        codeEnum.code,
+        message ?? codeEnum.message,
+        data == null ? state : ApiResultState<D>(data));
     if (codeEnum.code >= 30000) {
       result._ok = false;
     }

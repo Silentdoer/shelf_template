@@ -1,9 +1,8 @@
-import 'package:shelf_template/support/abstract_controller.dart';
 import 'package:shelf/shelf.dart';
+import 'package:shelf_template/support/abstract_controller.dart';
 import 'package:shelf_template/support/api_result.dart';
 
 class ExtState<D> extends ApiResultState<D> {
-
   int extData;
 
   ExtState(this.extData, D data) : super(data);
@@ -43,12 +42,14 @@ class UserController extends AbstractController {
     });
 
     router.get('/result4', (req) {
-      var result = ApiResult.successExec(data: '44sss', message: '消息啊啊啊', state: ExtState(99, '是否'));
+      var result = ApiResult.successExec(
+          data: '44sss', message: '消息啊啊啊', state: ExtState(99, '是否'));
       return Response.ok(result.toJsonString());
     });
 
     router.get('/result5', (req) {
-      var result = ApiResult.successExec(message: '消息啊啊啊', state: ExtState(99, '是否'));
+      var result =
+          ApiResult.successExec(message: '消息啊啊啊', state: ExtState(99, '是否'));
       return Response.ok(result.toJsonString());
     });
 
@@ -68,7 +69,11 @@ class UserController extends AbstractController {
     });
 
     router.get('/result9', (req) {
-      var result = ApiResult.custom(codeEnum: ApiResultCodeEnum.exceptionLogic, data: 99, message: 'hello是')..timestamp = DateTime.now().toString();
+      var result = ApiResult.custom(
+          codeEnum: ApiResultCodeEnum.exceptionLogic,
+          data: 99,
+          message: 'hello是')
+        ..timestamp = DateTime.now().toString();
       return Response.ok(result.toJsonString());
     });
   }

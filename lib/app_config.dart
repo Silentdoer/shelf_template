@@ -34,7 +34,7 @@ class AppConfig {
 
   Handler handler404 = (req) {
     return Response.notFound('抱歉，您来到了没有资源的荒原');
-  };  // 定义一种对象，所以这里需要;，而定义代码逻辑如switch，if或类型如class则不需要;
+  }; // 定义一种对象，所以这里需要;，而定义代码逻辑如switch，if或类型如class则不需要;
 
   void _config() {
     // 按顺序Filter请求
@@ -50,13 +50,14 @@ class AppConfig {
     var serviceHandler = _serviceRouter();
     if (enableStaticResource) {
       // 第二个参数只能是目录而不能是文件，所以index.html只能放到resources根目录
-      var staticHandler = createStaticHandler(resourceFolderRelativePath, defaultDocument: defaultStaticResourceFileName);
+      var staticHandler = createStaticHandler(resourceFolderRelativePath,
+          defaultDocument: defaultStaticResourceFileName);
       var cascade = Cascade()
-        // 两个handler都能处理一个请求时，
-        // 先add的handler优先处理，因此staticHandler应该放到业务逻辑的serviceHandler后面
-        .add(serviceHandler)
-        .add(staticHandler)
-        .add(handler404);
+          // 两个handler都能处理一个请求时，
+          // 先add的handler优先处理，因此staticHandler应该放到业务逻辑的serviceHandler后面
+          .add(serviceHandler)
+          .add(staticHandler)
+          .add(handler404);
       resultHandler = cascade.handler;
     } else {
       var cascade = Cascade().add(serviceHandler).add(handler404);

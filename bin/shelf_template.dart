@@ -1,6 +1,5 @@
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
-
 import 'package:shelf_template/app_config.dart';
 import 'package:shelf_template/middlewares/auth_middleware.dart';
 
