@@ -10,11 +10,11 @@ class ApiResult<T> {
   String message;
 
   /// 从1970年的时间点开始到今天的本地时间
-  String? timestamp;
+  int? timestamp;
 
   ApiResultState<T>? state;
 
-  int? thirdCode;
+  String? thirdCode;
 
   String? thirdMessage;
 

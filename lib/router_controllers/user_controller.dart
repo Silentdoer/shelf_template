@@ -73,7 +73,7 @@ class UserController extends AbstractController {
           codeEnum: ApiResultCodeEnum.exceptionLogic,
           data: 99,
           message: 'hello是')
-        ..timestamp = DateTime.now().toString();
+        ..timestamp = DateTime.now().millisecondsSinceEpoch;
       return Response.ok(result.toJsonString());
     });
   }
