@@ -15,4 +15,4 @@ dependencies:
 dev_dependencies:
   pedantic: ^1.10.0
   meta: ^1.4.0
-  shelf_hotreload: ^0.0.2
+  shelf_hotreload: ^1.0.0
